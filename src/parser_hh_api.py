@@ -49,6 +49,7 @@ class HH(JobVacancyAPI):
                 pages = resp['pages']
                 vacancies = resp['items']
                 self.vacancies.extend(vacancies)
+                print(f'Загружены вакансии. Страница {page + 1} из {pages}')
                 if page == pages - 1:
                     break
                 self.params['page'] += 1
