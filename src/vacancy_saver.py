@@ -18,7 +18,7 @@ class BaseSaver(ABC):
         pass
 
     @abstractmethod
-    def get_filter_vacancy(self, key, value) -> list[dict]:
+    def get_filter_vacancy(self, key, value) -> list[dict] | str:
         """
         Абстрактный метод получения вакансий по критериям
         :param key: поле поиска
@@ -60,12 +60,12 @@ class JsonSaver(BaseSaver):
                 with open(self.file_path, "w", encoding='UTF-8') as outfile:
                     json.dump(data_vacancy, outfile, indent=2, ensure_ascii=False)
 
-    def get_filter_vacancy(self, key, value):
+    def get_filter_vacancy(self, key: str, value: str) -> list[dict] | str:
         """
         Метод получения списка вакансий из json файла
         :param key: поле поиска
         :param value: значение для поиска
-        :return:
+        :return: список словарей или строку
         """
         if os.path.exists(self.file_path):
             with open(self.file_path, encoding='UTF-8') as file:
